@@ -32,6 +32,7 @@ defaults:
       type: "pages"
     values:
       layout: default
+      render_with_liquid: false
 
 exclude:
   - Gemfile
