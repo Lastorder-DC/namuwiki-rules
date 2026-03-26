@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'ko' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 }}">
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    header {
+      border-bottom: 1px solid rgba(127, 127, 127, 0.25);
+    }
+
+    .site-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: inherit;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 32px;
+      align-items: start;
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      padding-top: 8px;
+    }
+
+    nav h2 {
+      font-size: 1rem;
+      margin-top: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav li + li {
+      margin-top: 8px;
+    }
+
+    article {
+      min-width: 0;
+    }
+
+    article img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    article pre {
+      overflow-x: auto;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(127, 127, 127, 0.12);
+    }
+
+    article code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      display: block;
+      overflow-x: auto;
+    }
+
+    th, td {
+      border: 1px solid rgba(127, 127, 127, 0.25);
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    </div>
+  </header>
+
+  <div class="wrap layout">
+    <aside>
+      <nav aria-label="문서 목록">
+        <h2>Documents</h2>
+        <ul>
+          {% assign docs = site.html_pages | sort: "path" %}
+          {% for p in docs %}
+            {% unless p.path contains "_layouts/" %}
+              <li>
+                <a href="{{ p.url | relative_url }}">
+                  {{ p.title | default: p.name }}
+                </a>
+              </li>
+            {% endunless %}
+          {% endfor %}
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <article>
+        {{ content }}
+      </article>
+    </main>
+  </div>
+</body>
+</html>

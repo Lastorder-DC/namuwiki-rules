@@ -1,0 +1,41 @@
+title: Repository Docs
+description: README.md and linked Markdown docs
+lang: ko
+
+url: "https://lastorder.xyz"
+baseurl: "/namuwiki-rules"
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  hard_wrap: false
+
+permalink: pretty
+
+relative_links:
+  enabled: true
+  collections: true
+
+readme_index:
+  enabled: true
+  remove_originals: true
+
+titles_from_headings:
+  enabled: true
+  strip_title: true
+  collections: true
+
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: default
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .github
